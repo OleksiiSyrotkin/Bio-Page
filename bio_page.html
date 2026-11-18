@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Oleksii Syrotkin — QA Engineer</title>
+  <meta name="description" content="Oleksii Syrotkin — QA Engineer. Manual and automated testing of web applications: Selenium (Python), Playwright (JS), Postman, API testing.">
+  <meta property="og:title" content="Oleksii Syrotkin — QA Engineer">
+  <meta property="og:description" content="Manual and automated testing of web applications: Selenium (Python), Playwright (JS), Postman, API testing.">
+  <meta property="og:type" content="profile">
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -16,13 +21,13 @@
       --border: rgba(255,255,255,0.07);
       --border2: rgba(255,255,255,0.13);
       --text: #f0ede8;
+      --text2: rgba(240,237,232,0.72);
       --muted: #8a8785;
-      --accent: #c8f0a0;
-      --accent2: #7de0c0;
-      --accent3: #f0c060;
-      --tag-bg: rgba(200,240,160,0.08);
-      --tag-border: rgba(200,240,160,0.2);
-      --tag-text: #b8e090;
+      --accent: #8fc7ff;
+      --accent2: #b4a6ff;
+      --tag-bg: rgba(143,199,255,0.08);
+      --tag-border: rgba(143,199,255,0.22);
+      --tag-text: #9fcfff;
     }
 
     html { scroll-behavior: smooth; }
@@ -30,13 +35,12 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Outfit', sans-serif;
-      font-weight: 400;
+      font-family: 'Outfit', system-ui, sans-serif;
       min-height: 100vh;
       overflow-x: hidden;
+      line-height: 1.5;
     }
 
-    /* BG Grid */
     body::before {
       content: '';
       position: fixed;
@@ -53,167 +57,103 @@
       position: fixed;
       width: 600px; height: 600px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(120,220,160,0.07) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(120,170,240,0.08) 0%, transparent 70%);
       top: -200px; right: -200px;
       pointer-events: none;
       z-index: 0;
-      animation: glowPulse 8s ease-in-out infinite;
     }
-    .glow2 {
-      position: fixed;
-      width: 400px; height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(100,180,240,0.05) 0%, transparent 70%);
-      bottom: -100px; left: -100px;
-      pointer-events: none;
-      z-index: 0;
-      animation: glowPulse 12s ease-in-out infinite reverse;
-    }
-    @keyframes glowPulse {
-      0%, 100% { opacity: 0.6; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.1); }
-    }
+
+    a { color: inherit; }
 
     .wrapper {
       position: relative;
       z-index: 1;
-      max-width: 860px;
+      max-width: 880px;
       margin: 0 auto;
-      padding: 60px 24px 80px;
+      padding: 64px 24px 80px;
     }
 
-    /* ── HERO ── */
     .hero {
       display: grid;
-      grid-template-columns: 140px 1fr;
+      grid-template-columns: 132px 1fr;
       gap: 36px;
       align-items: start;
       margin-bottom: 64px;
       animation: fadeUp 0.6s ease both;
     }
 
-    @media (max-width: 600px) {
-      .hero { grid-template-columns: 1fr; text-align: center; }
-      .hero-avatar { margin: 0 auto; }
-      .hero-links { justify-content: center; }
-      .status-dot-row { justify-content: center; }
-    }
-
-    .hero-avatar {
-      width: 140px; height: 140px;
+    .avatar {
+      width: 132px; height: 132px;
       border-radius: 20px;
       border: 1px solid var(--border2);
-      overflow: hidden;
-      position: relative;
-      flex-shrink: 0;
       background: var(--surface2);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'DM Serif Display', serif;
-      font-size: 56px;
-      color: var(--accent);
-      letter-spacing: -1px;
+      overflow: hidden;
     }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    .hero-name {
+    h1 {
       font-family: 'DM Serif Display', serif;
-      font-size: clamp(32px, 6vw, 48px);
       font-weight: 400;
-      line-height: 1.1;
-      color: var(--text);
-      margin-bottom: 8px;
+      font-size: clamp(34px, 6vw, 50px);
+      line-height: 1.05;
       letter-spacing: -0.5px;
+      margin-bottom: 10px;
     }
-    .hero-name em {
-      font-style: italic;
-      color: var(--accent);
-    }
+    h1 em { font-style: italic; color: var(--accent); }
 
-    .hero-role {
+    .role {
       font-family: 'DM Mono', monospace;
       font-size: 13px;
       color: var(--accent2);
-      margin-bottom: 16px;
-      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 14px;
     }
-    .hero-role::before {
-      content: '>';
-      color: var(--muted);
-    }
+    .role::before { content: '> '; color: var(--muted); }
 
-    .status-dot-row {
+    .status {
       display: flex; align-items: center; gap: 8px;
-      margin-bottom: 20px;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 18px;
     }
     .dot {
       width: 8px; height: 8px; border-radius: 50%;
       background: var(--accent);
       animation: blink 2.5s ease-in-out infinite;
     }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-    .status-text {
-      font-size: 13px;
-      color: var(--muted);
-    }
 
-    .hero-bio {
+    .bio {
       font-size: 15px;
       line-height: 1.7;
-      color: rgba(240,237,232,0.7);
-      max-width: 560px;
+      color: var(--text2);
+      max-width: 580px;
       margin-bottom: 24px;
     }
 
-    .hero-links {
-      display: flex; gap: 10px; flex-wrap: wrap;
-    }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
     .btn {
       display: inline-flex; align-items: center; gap: 6px;
-      padding: 8px 16px;
+      padding: 9px 16px;
       border-radius: 8px;
       font-size: 13px;
       font-weight: 500;
       text-decoration: none;
-      border: 1px solid;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-family: 'Outfit', sans-serif;
-    }
-    .btn-primary {
-      background: var(--accent);
-      color: #0e1a08;
-      border-color: var(--accent);
-    }
-    .btn-primary:hover { background: #b0e080; }
-    .btn-ghost {
-      background: transparent;
+      border: 1px solid var(--border2);
       color: var(--text);
-      border-color: var(--border2);
+      transition: background 0.2s, border-color 0.2s;
     }
-    .btn-ghost:hover {
-      border-color: rgba(255,255,255,0.3);
-      background: var(--surface2);
-    }
+    .btn:hover { background: var(--surface2); border-color: rgba(255,255,255,0.3); }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: #0a1626; }
+    .btn.primary:hover { background: #a9d4ff; }
 
-    /* ── SECTION ── */
-    .section {
+    section {
       margin-bottom: 56px;
       animation: fadeUp 0.6s ease both;
     }
-    .section:nth-child(2) { animation-delay: 0.1s; }
-    .section:nth-child(3) { animation-delay: 0.2s; }
-    .section:nth-child(4) { animation-delay: 0.3s; }
-    .section:nth-child(5) { animation-delay: 0.4s; }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .section-label {
+    h2 {
       font-family: 'DM Mono', monospace;
+      font-weight: 400;
       font-size: 11px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -221,429 +161,396 @@
       margin-bottom: 20px;
       display: flex; align-items: center; gap: 12px;
     }
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
+    h2::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-    /* ── SKILLS ── */
-    .skills-grid {
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
       gap: 12px;
     }
 
-    .skill-card {
+    .card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 16px 18px;
       transition: border-color 0.2s, background 0.2s;
-      cursor: default;
     }
-    .skill-card:hover {
-      border-color: var(--border2);
-      background: var(--surface2);
-    }
+    .card:hover { border-color: var(--border2); background: var(--surface2); }
+    .card-title { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .card-text { font-size: 13px; color: var(--muted); line-height: 1.55; }
 
-    .skill-icon {
-      font-size: 22px;
-      margin-bottom: 10px;
+    .projects { display: flex; flex-direction: column; gap: 12px; }
+    .project {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 6px 16px;
+      align-items: start;
     }
-    .skill-name {
+    .project-name {
+      font-family: 'DM Mono', monospace;
       font-size: 14px;
       font-weight: 500;
       color: var(--text);
-      margin-bottom: 4px;
+      text-decoration: none;
     }
-    .skill-desc {
+    .project-name:hover { color: var(--accent); }
+    .project-site { font-size: 12px; color: var(--accent2); font-family: 'DM Mono', monospace; }
+    .project-desc { grid-column: 1 / -1; font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .project-links { display: flex; gap: 8px; }
+    .project-links a {
       font-size: 12px;
-      color: var(--muted);
-      line-height: 1.5;
+      text-decoration: none;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border2);
+      color: var(--text2);
+      white-space: nowrap;
     }
+    .project-links a:hover { color: var(--accent); border-color: var(--tag-border); }
+    .stack { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
 
-    .skill-bar-wrap {
-      margin-top: 10px;
-      height: 3px;
-      background: var(--border);
-      border-radius: 99px;
-      overflow: hidden;
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      padding: 5px 11px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-family: 'DM Mono', monospace;
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      color: var(--tag-text);
     }
-    .skill-bar {
-      height: 100%;
-      border-radius: 99px;
-      background: linear-gradient(90deg, var(--accent2), var(--accent));
-      transform-origin: left;
-      animation: barIn 1s ease both;
-    }
-    @keyframes barIn {
-      from { transform: scaleX(0); }
-      to   { transform: scaleX(1); }
-    }
+    .stack .tag { padding: 2px 8px; font-size: 11px; }
+    .tag.blue { background: rgba(180,166,255,0.08); border-color: rgba(180,166,255,0.22); color: #c0b4ff; }
+    .tag.amber { background: rgba(240,192,96,0.08); border-color: rgba(240,192,96,0.2); color: #d4a840; }
 
-    /* ── EXPERIENCE ── */
-    .exp-list { display: flex; flex-direction: column; gap: 0; }
-
-    .exp-item {
+    .timeline { display: flex; flex-direction: column; }
+    .job {
       display: grid;
       grid-template-columns: 24px 1fr;
-      gap: 0 20px;
-      position: relative;
-      padding-bottom: 32px;
+      gap: 0 18px;
+      padding-bottom: 30px;
     }
-    .exp-item:last-child { padding-bottom: 0; }
-
-    .exp-line {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-    }
-    .exp-dot {
+    .job:last-child { padding-bottom: 0; }
+    .rail { display: flex; flex-direction: column; align-items: center; }
+    .rail-dot {
       width: 10px; height: 10px;
       border-radius: 50%;
       border: 2px solid var(--accent);
       background: var(--bg);
-      flex-shrink: 0;
-      margin-top: 4px;
-      position: relative;
-      z-index: 1;
+      margin-top: 5px;
     }
-    .exp-dot.current {
-      background: var(--accent);
-      box-shadow: 0 0 0 4px rgba(200,240,160,0.15);
-      animation: ringPulse 2.5s ease infinite;
-    }
-    @keyframes ringPulse {
-      0%, 100% { box-shadow: 0 0 0 4px rgba(200,240,160,0.15); }
-      50%       { box-shadow: 0 0 0 8px rgba(200,240,160,0.05); }
-    }
-    .exp-connector {
-      flex: 1;
-      width: 1px;
-      background: var(--border2);
-      margin-top: 4px;
-    }
-    .exp-item:last-child .exp-connector { display: none; }
+    .job.current .rail-dot { background: var(--accent); box-shadow: 0 0 0 4px rgba(143,199,255,0.18); }
+    .rail-line { flex: 1; width: 1px; background: var(--border2); margin-top: 4px; }
+    .job:last-child .rail-line { display: none; }
+    .job-company { font-size: 16px; font-weight: 600; }
+    .job-role { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--accent2); margin: 2px 0 4px; }
+    .job-period { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+    .job ul { list-style: none; font-size: 13px; color: var(--text2); line-height: 1.7; }
+    .job li { padding-left: 14px; position: relative; }
+    .job li::before { content: '–'; position: absolute; left: 0; color: var(--muted); }
 
-    .exp-content {
-      padding-top: 0;
-    }
-    .exp-company {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 2px;
-    }
-    .exp-position {
-      font-size: 13px;
-      color: var(--accent2);
-      font-family: 'DM Mono', monospace;
-      margin-bottom: 6px;
-    }
-    .exp-period {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-    .exp-duties {
-      font-size: 13px;
-      color: rgba(240,237,232,0.6);
-      line-height: 1.7;
-    }
-    .exp-duties li {
-      margin-bottom: 3px;
-      padding-left: 14px;
-      position: relative;
-      list-style: none;
-    }
-    .exp-duties li::before {
-      content: '–';
-      position: absolute;
-      left: 0;
-      color: var(--muted);
-    }
+    .about { font-size: 14px; color: var(--text2); line-height: 1.8; max-width: 640px; }
 
-    /* ── TAGS ── */
-    .tags-row {
-      display: flex; flex-wrap: wrap; gap: 8px;
-    }
-    .tag {
-      padding: 5px 12px;
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: 500;
-      background: var(--tag-bg);
-      border: 1px solid var(--tag-border);
-      color: var(--tag-text);
-      font-family: 'DM Mono', monospace;
-      transition: all 0.15s;
-      cursor: default;
-    }
-    .tag:hover {
-      background: rgba(200,240,160,0.14);
-      border-color: rgba(200,240,160,0.35);
-    }
-    .tag.amber {
-      background: rgba(240,192,96,0.08);
-      border-color: rgba(240,192,96,0.2);
-      color: #d4a840;
-    }
-    .tag.blue {
-      background: rgba(100,180,240,0.08);
-      border-color: rgba(100,180,240,0.2);
-      color: #80b8e8;
-    }
-
-    /* ── CONTACTS ── */
-    .contact-grid {
+    .contacts {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 12px;
     }
-    .contact-item {
+    .contact {
+      display: block;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 10px;
       padding: 14px 16px;
-      display: flex; align-items: center; gap: 12px;
       text-decoration: none;
-      color: var(--text);
-      transition: all 0.2s;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
     }
-    .contact-item:hover {
-      border-color: var(--border2);
-      background: var(--surface2);
-      transform: translateY(-2px);
-    }
-    .contact-icon {
-      font-size: 18px;
-      flex-shrink: 0;
-    }
+    .contact:hover { border-color: var(--border2); background: var(--surface2); transform: translateY(-2px); }
     .contact-label {
-      font-size: 11px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
       font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
     }
-    .contact-value {
-      font-size: 13px;
-      font-weight: 500;
-    }
+    .contact-value { font-size: 13px; font-weight: 500; word-break: break-all; }
 
-    /* ── FOOTER ── */
-    .footer {
-      margin-top: 80px;
-      padding-top: 24px;
+    footer {
+      margin-top: 72px;
+      padding-top: 22px;
       border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .footer-text {
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+      font-family: 'DM Mono', monospace;
       font-size: 12px;
       color: var(--muted);
-      font-family: 'DM Mono', monospace;
-    }
-    .footer-year {
-      color: var(--accent);
     }
 
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes blink { 50% { opacity: 0.3; } }
+
+    @media (max-width: 600px) {
+      .wrapper { padding-top: 40px; }
+      .hero { grid-template-columns: 1fr; gap: 20px; }
+      .avatar { width: 112px; height: 112px; }
+      .project { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+
+    @media print {
+      body { background: #fff; color: #000; }
+      body::before, .glow, .actions { display: none; }
+      .card, .contact { background: #fff; border-color: #ddd; }
+      .bio, .about, .job ul, .card-text, .project-desc { color: #333; }
+    }
   </style>
 </head>
 <body>
 <div class="glow"></div>
-<div class="glow2"></div>
 
 <div class="wrapper">
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-avatar">А</div>
-    <div class="hero-info">
-      <h1 class="hero-name">Alex<br><em>QA Engineer</em></h1>
-      <div class="hero-role">Middle QA / Frontend Verifier</div>
-      <div class="status-dot-row">
-        <div class="dot"></div>
-        <span class="status-text">Відкритий до нових можливостей</span>
-      </div>
-      <p class="hero-bio">
-        Займаюсь ручним тестуванням, написанням тест-кейсів і bug-репортів, QA каталогів і мобільних додатків.
-        Маю досвід роботи з Next.js проектами, DevTools, Docker + WebStorm, і знаю, як правильно зламати будь-який фільтр.
+  <header class="hero">
+    <div class="avatar"><img src="https://avatars.githubusercontent.com/u/110059827?v=4&s=400" alt="Oleksii Syrotkin"></div>
+    <div>
+      <h1>Oleksii Syrotkin<br><em>QA Engineer</em></h1>
+      <div class="role">Manual &amp; Automation Testing · Web · API</div>
+      <div class="status"><span class="dot"></span>Open to new opportunities, remote</div>
+      <p class="bio">
+        QA engineer testing web applications since 2022. Day to day I test a rental marketplace built on Next.js:
+        functional and regression testing, API checks in Postman, UI automation with Selenium and Python.
+        I like finding the edge case that breaks a filter and writing a bug report the developer can fix without questions.
       </p>
-      <div class="hero-links">
-        <a href="mailto:alex@example.com" class="btn btn-primary">✉ Написати</a>
-        <a href="#" class="btn btn-ghost">↓ Завантажити CV</a>
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/OleksiiSyrotkin" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/oleksii-syrotkin-935bbb24a/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="mailto:oleksii.syrotkin@gmail.com">Email</a>
       </div>
     </div>
-  </div>
+  </header>
 
-  <!-- SKILLS -->
-  <div class="section">
-    <div class="section-label">Навички</div>
-    <div class="skills-grid">
-      <div class="skill-card">
-        <div class="skill-icon">🧪</div>
-        <div class="skill-name">Manual QA</div>
-        <div class="skill-desc">Функціональне, регресійне, smoke-тестування</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="width:90%;animation-delay:0.1s"></div></div>
+  <section>
+    <h2>What I do</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="card-title">Manual testing</div>
+        <div class="card-text">Functional, regression and smoke testing, test design with boundary values and equivalence classes, release checks.</div>
       </div>
-      <div class="skill-card">
-        <div class="skill-icon">🐛</div>
-        <div class="skill-name">Bug Reporting</div>
-        <div class="skill-desc">Чіткі звіти, відтворення кроків, скріншоти</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="width:88%;animation-delay:0.2s"></div></div>
+      <div class="card">
+        <div class="card-title">Test documentation</div>
+        <div class="card-text">Test cases and checklists in TestRail, clear bug reports with steps, logs and screenshots in Jira.</div>
       </div>
-      <div class="skill-card">
-        <div class="skill-icon">📋</div>
-        <div class="skill-name">Test Cases</div>
-        <div class="skill-desc">HTML test-менеджер, покриття за модулями</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="width:85%;animation-delay:0.3s"></div></div>
+      <div class="card">
+        <div class="card-title">API testing</div>
+        <div class="card-text">REST APIs in Postman: auth flows, request/response validation, pre-request scripts, Newman runs.</div>
       </div>
-      <div class="skill-card">
-        <div class="skill-icon">🔧</div>
-        <div class="skill-name">DevTools</div>
-        <div class="skill-desc">CSS, Network, Console, XSS-перевірки</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="width:80%;animation-delay:0.4s"></div></div>
+      <div class="card">
+        <div class="card-title">UI automation</div>
+        <div class="card-text">Selenium + Python with pytest and Page Object Model, Playwright with JavaScript, tests running in GitHub Actions.</div>
       </div>
-      <div class="skill-card">
-        <div class="skill-icon">🐳</div>
-        <div class="skill-name">Docker + WebStorm</div>
-        <div class="skill-desc">Локальний запуск, гілки, feature-тестування</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="width:72%;animation-delay:0.5s"></div></div>
+      <div class="card">
+        <div class="card-title">Frontend checks</div>
+        <div class="card-text">Chrome DevTools: network, console, layout, basic security checks (XSS in inputs and filters).</div>
       </div>
-      <div class="skill-card">
-        <div class="skill-icon">📱</div>
-        <div class="skill-name">Mobile QA</div>
-        <div class="skill-desc">iOS / Android, відповідність дизайну</div>
-        <div class="skill-bar-wrap"><div class="skill-bar" style="width:70%;animation-delay:0.6s"></div></div>
+      <div class="card">
+        <div class="card-title">Web &amp; mobile</div>
+        <div class="card-text">Cross-browser testing, responsive layouts, iOS and Android apps checked against Figma designs.</div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- STACK -->
-  <div class="section">
-    <div class="section-label">Стек і інструменти</div>
-    <div class="tags-row">
-      <span class="tag">Next.js</span>
-      <span class="tag">HTML/CSS</span>
-      <span class="tag">JavaScript</span>
-      <span class="tag blue">Chrome DevTools</span>
-      <span class="tag blue">Postman</span>
-      <span class="tag blue">Docker</span>
-      <span class="tag blue">WebStorm</span>
-      <span class="tag amber">Jira / Linear</span>
-      <span class="tag amber">Figma</span>
-      <span class="tag amber">Notion</span>
+  <section>
+    <h2>Automation projects</h2>
+    <div class="projects">
+      <div class="card project">
+        <a class="project-name" href="https://github.com/OleksiiSyrotkin/toolshop-selenium-python" target="_blank" rel="noopener">toolshop-selenium-python</a>
+        <div class="project-links">
+          <a href="https://github.com/OleksiiSyrotkin/toolshop-selenium-python" target="_blank" rel="noopener">Code</a>
+          <a href="https://oleksiisyrotkin.github.io/toolshop-selenium-python/" target="_blank" rel="noopener">Report</a>
+        </div>
+        <div class="project-desc">UI and API tests for an e-commerce demo app: login, search, sorting, cart totals, out-of-stock products. UI data is checked against the API, JSON schemas are validated.</div>
+        <div class="stack"><span class="tag">Python</span><span class="tag">Selenium</span><span class="tag">pytest</span><span class="tag">requests</span><span class="tag">Allure</span></div>
+      </div>
+
+      <div class="card project">
+        <a class="project-name" href="https://github.com/OleksiiSyrotkin/the-internet-selenium-python" target="_blank" rel="noopener">the-internet-selenium-python</a>
+        <div class="project-links">
+          <a href="https://github.com/OleksiiSyrotkin/the-internet-selenium-python" target="_blank" rel="noopener">Code</a>
+          <a href="https://oleksiisyrotkin.github.io/the-internet-selenium-python/" target="_blank" rel="noopener">Report</a>
+        </div>
+        <div class="project-desc">Elements that are usually hard to automate: JS alerts and prompts, hovers, multiple windows, dropdowns, dynamic loading. Runs in Chrome and Firefox.</div>
+        <div class="stack"><span class="tag">Python</span><span class="tag">Selenium</span><span class="tag">pytest</span><span class="tag">Allure</span></div>
+      </div>
+
+      <div class="card project">
+        <a class="project-name" href="https://github.com/OleksiiSyrotkin/saucedemo-playwright-js" target="_blank" rel="noopener">saucedemo-playwright-js</a>
+        <div class="project-links">
+          <a href="https://github.com/OleksiiSyrotkin/saucedemo-playwright-js" target="_blank" rel="noopener">Code</a>
+          <a href="https://oleksiisyrotkin.github.io/saucedemo-playwright-js/" target="_blank" rel="noopener">Report</a>
+        </div>
+        <div class="project-desc">E2E tests for an online shop: login with different user types, sorting, cart, full checkout with tax and total checks. Chrome, Firefox and mobile viewport.</div>
+        <div class="stack"><span class="tag blue">JavaScript</span><span class="tag blue">Playwright</span></div>
+      </div>
+
+      <div class="card project">
+        <a class="project-name" href="https://github.com/OleksiiSyrotkin/toolshop-playwright-js" target="_blank" rel="noopener">toolshop-playwright-js</a>
+        <div class="project-links">
+          <a href="https://github.com/OleksiiSyrotkin/toolshop-playwright-js" target="_blank" rel="noopener">Code</a>
+          <a href="https://oleksiisyrotkin.github.io/toolshop-playwright-js/" target="_blank" rel="noopener">Report</a>
+        </div>
+        <div class="project-desc">UI and API tests with a saved login session, network mocking with page.route, request body checks and UI data compared with the API.</div>
+        <div class="stack"><span class="tag blue">JavaScript</span><span class="tag blue">Playwright</span><span class="tag blue">API testing</span></div>
+      </div>
+
+      <div class="card project">
+        <a class="project-name" href="https://github.com/OleksiiSyrotkin/conduit-api-postman" target="_blank" rel="noopener">conduit-api-postman</a>
+        <div class="project-links">
+          <a href="https://github.com/OleksiiSyrotkin/conduit-api-postman" target="_blank" rel="noopener">Code</a>
+          <a href="https://oleksiisyrotkin.github.io/conduit-api-postman/" target="_blank" rel="noopener">Report</a>
+        </div>
+        <div class="project-desc">Postman collection for a Medium-like REST API: registration, token auth, articles, comments, profiles. Pre-request scripts create test data, the collection runs end to end with Newman.</div>
+        <div class="stack"><span class="tag amber">Postman</span><span class="tag amber">Newman</span><span class="tag amber">REST API</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Tools</h2>
+    <div class="tags">
+      <span class="tag">Python</span>
+      <span class="tag">pytest</span>
+      <span class="tag">Selenium WebDriver</span>
+      <span class="tag blue">JavaScript</span>
+      <span class="tag blue">Playwright</span>
+      <span class="tag blue">Cypress</span>
+      <span class="tag amber">Postman</span>
+      <span class="tag amber">Newman</span>
+      <span class="tag amber">REST API</span>
+      <span class="tag amber">SQL</span>
       <span class="tag">Git / GitHub</span>
-      <span class="tag">SQL basics</span>
+      <span class="tag">GitHub Actions</span>
+      <span class="tag">Allure</span>
+      <span class="tag">Docker</span>
+      <span class="tag blue">Chrome DevTools</span>
+      <span class="tag blue">Jira</span>
+      <span class="tag blue">TestRail</span>
+      <span class="tag blue">Figma</span>
+      <span class="tag blue">BrowserStack</span>
     </div>
-  </div>
+  </section>
 
-  <!-- EXPERIENCE -->
-  <div class="section">
-    <div class="section-label">Досвід</div>
-    <div class="exp-list">
-      <div class="exp-item">
-        <div class="exp-line">
-          <div class="exp-dot current"></div>
-          <div class="exp-connector"></div>
-        </div>
-        <div class="exp-content">
-          <div class="exp-company">VOLOS (volos.rent)</div>
-          <div class="exp-position">QA Engineer / Catalog Manager</div>
-          <div class="exp-period">2023 — тепер · Kyiv, Ukraine (remote)</div>
-          <ul class="exp-duties">
-            <li>Ручне QA платформи оренди: авторизація, оголошення, бронювання, чат</li>
-            <li>Побудова HTML-системи тест-кейсів (26+ кейсів, 5 модулів)</li>
-            <li>Структурування білінгвального (UK/RU) каталогу категорій</li>
-            <li>Тестування фільтрів, XSS, мобільного додатку</li>
-            <li>Написання bug-репортів, участь у дизайн-обговореннях</li>
+  <section>
+    <h2>Experience</h2>
+    <div class="timeline">
+      <div class="job current">
+        <div class="rail"><span class="rail-dot"></span><span class="rail-line"></span></div>
+        <div>
+          <div class="job-company">VOLOS</div>
+          <div class="job-role">QA Engineer</div>
+          <div class="job-period">Aug 2024 — present · remote</div>
+          <ul>
+            <li>Testing a rental marketplace (Next.js): auth, listings, booking, chat, filters, mobile app</li>
+            <li>Requirements review, mockup discussions in Figma</li>
+            <li>Checklists and test cases in TestRail, bug reports in Jira</li>
+            <li>API testing with Postman, UI automation with Selenium + Python (Page Object Model)</li>
+            <li>Catalog structure, filters and input validation checks (incl. XSS)</li>
           </ul>
         </div>
       </div>
-      <div class="exp-item">
-        <div class="exp-line">
-          <div class="exp-dot"></div>
-          <div class="exp-connector"></div>
+      <div class="job">
+        <div class="rail"><span class="rail-dot"></span><span class="rail-line"></span></div>
+        <div>
+          <div class="job-company">Alitel Systems</div>
+          <div class="job-role">QA Engineer</div>
+          <div class="job-period">Jan 2023 — Aug 2024 · Kyiv, Ukraine</div>
+          <ul>
+            <li>Requirements refinement, work with Figma layouts</li>
+            <li>Decomposition, test cases and test runs in TestRail</li>
+            <li>Bug reporting in Jira</li>
+          </ul>
         </div>
-        <div class="exp-content">
-          <div class="exp-company">Freelance / Self-study</div>
-          <div class="exp-position">QA Trainee → Middle QA</div>
-          <div class="exp-period">2022 — 2023</div>
-          <ul class="exp-duties">
-            <li>Підготовка до інтерв'ю (STAR-метод, HTTP-коди, DevTools)</li>
-            <li>Вивчення тест-дизайну: граничні значення, класи еквівалентності</li>
-            <li>Особисті проекти з верстки та автоматизації рутини</li>
+      </div>
+      <div class="job">
+        <div class="rail"><span class="rail-dot"></span><span class="rail-line"></span></div>
+        <div>
+          <div class="job-company">Nix Solutions</div>
+          <div class="job-role">General QA</div>
+          <div class="job-period">Jun 2022 — Jan 2023 · remote</div>
+          <ul>
+            <li>Scrum team: sprint planning, daily meetings, retrospectives</li>
+            <li>Decomposition, test cases, RTM and permission tables</li>
+            <li>Test execution in TestRail, bug reports in Jira</li>
+          </ul>
+        </div>
+      </div>
+      <div class="job">
+        <div class="rail"><span class="rail-dot"></span><span class="rail-line"></span></div>
+        <div>
+          <div class="job-company">Mate academy</div>
+          <div class="job-role">QA Engineer, course</div>
+          <div class="job-period">Apr 2022 — Jun 2022 · remote</div>
+          <ul>
+            <li>Test cases and test runs in TestRail, smoke and regression testing</li>
+            <li>Chrome DevTools, Postman, Cypress</li>
+          </ul>
+        </div>
+      </div>
+      <div class="job">
+        <div class="rail"><span class="rail-dot"></span><span class="rail-line"></span></div>
+        <div>
+          <div class="job-company">Before IT</div>
+          <div class="job-role">Land Manager</div>
+          <div class="job-period">2011 — 2022</div>
+          <ul>
+            <li>10 years of work with documents, regulations and details where a small mistake costs a lot</li>
+            <li>Education: Master of Finance (KNEU), Master of Geodesy and Land Management (KNUCA)</li>
           </ul>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- ABOUT -->
-  <div class="section">
-    <div class="section-label">Про мене</div>
-    <div class="tags-row" style="flex-direction:column; gap: 14px;">
-      <p style="font-size:14px; color:rgba(240,237,232,0.65); line-height:1.8; max-width:620px;">
-        Живу біля Києва, займаюсь QA на rental/classifieds платформі. Паралельно —
-        багато hands-on будівництва та благоустрою вдома: від септика до іригації.
-        Люблю системний підхід, деталі і коли все нарешті працює так, як треба.
-      </p>
-      <div class="tags-row">
-        <span class="tag">🇺🇦 Kyiv area</span>
-        <span class="tag amber">Будівництво</span>
-        <span class="tag amber">DIY</span>
-        <span class="tag blue">Системний підхід</span>
-        <span class="tag">Батько</span>
-      </div>
-    </div>
-  </div>
+  <section>
+    <h2>About</h2>
+    <p class="about">
+      I like a systematic approach, details and the moment when everything finally works the way it should.
+      Outside of work I do a lot of hands-on building at home, from a septic system to irrigation, which is basically testing in real life:
+      plan, check, find what's wrong, fix it. English: upper-intermediate.
+    </p>
+  </section>
 
-  <!-- CONTACTS -->
-  <div class="section">
-    <div class="section-label">Контакти</div>
-    <div class="contact-grid">
-      <a href="mailto:alex@example.com" class="contact-item">
-        <span class="contact-icon">✉</span>
-        <div>
-          <div class="contact-label">Email</div>
-          <div class="contact-value">alex@example.com</div>
-        </div>
+  <section>
+    <h2>Contacts</h2>
+    <div class="contacts">
+      <a class="contact" href="mailto:oleksii.syrotkin@gmail.com">
+        <div class="contact-label">Email</div>
+        <div class="contact-value">oleksii.syrotkin@gmail.com</div>
       </a>
-      <a href="https://t.me/alex" class="contact-item">
-        <span class="contact-icon">✈</span>
-        <div>
-          <div class="contact-label">Telegram</div>
-          <div class="contact-value">@alex</div>
-        </div>
+      <a class="contact" href="https://www.linkedin.com/in/oleksii-syrotkin-935bbb24a/" target="_blank" rel="noopener">
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-value">in/oleksii-syrotkin</div>
       </a>
-      <a href="https://linkedin.com/in/alex" class="contact-item">
-        <span class="contact-icon">💼</span>
-        <div>
-          <div class="contact-label">LinkedIn</div>
-          <div class="contact-value">linkedin.com/in/alex</div>
-        </div>
+      <a class="contact" href="https://t.me/OleksiiSyrotkin" target="_blank" rel="noopener">
+        <div class="contact-label">Telegram</div>
+        <div class="contact-value">@OleksiiSyrotkin</div>
       </a>
-      <a href="https://github.com/alex" class="contact-item">
-        <span class="contact-icon">⌥</span>
-        <div>
-          <div class="contact-label">GitHub</div>
-          <div class="contact-value">github.com/alex</div>
-        </div>
+      <a class="contact" href="https://github.com/OleksiiSyrotkin" target="_blank" rel="noopener">
+        <div class="contact-label">GitHub</div>
+        <div class="contact-value">github.com/OleksiiSyrotkin</div>
       </a>
     </div>
-  </div>
+  </section>
 
-  <div class="footer">
-    <span class="footer-text">Alex · QA Engineer · <span class="footer-year">2025</span></span>
-    <span class="footer-text">Kyiv, Ukraine</span>
-  </div>
+  <footer>
+    <span>Oleksii Syrotkin · QA Engineer</span>
+    <span>Ukraine</span>
+  </footer>
 
 </div>
 </body>
