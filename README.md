@@ -1,8 +1,8 @@
-# pet-project
+# Bio-Page
 
 My personal bio page: a short CV in one HTML file.
 
-**Live page:** https://oleksiisyrotkin.github.io/pet-project/bio_page.html
+**Live page:** https://oleksiisyrotkin.github.io/Bio-Page/bio_page.html
 
 ## What's inside
 
